@@ -28,12 +28,36 @@ public static class BD
     }
     static public List<Pregunta> ObtenerPreguntas(int dificultad, int categoria)
     {
-        List<Pregunta>_ObtenerPreguntas=new List<Pregunta>();
+    
+        List<Pregunta> _ObtenerPreguntas = new List<Pregunta>();
+
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+        string sql = "SELECT * FROM Pregunta WHERE 1=1";
+
+        if (dificultad != -1)
+            {
+                sql += " AND DificultadId = @dificultad";
+            }
+        if (categoria != -1)
+            {
+                sql += " AND CategoriaId = @categoria";
+            }
+
+        _ObtenerPreguntas = db.Query<Pregunta>(sql, new { dificultad, categoria }).ToList();
+        }
+
+    return _ObtenerPreguntas;
+    }
+    static public List<Respuesta> ObtenerRespuestas(int idPregunta)
+    {
+        List<Respuesta>_ObtenerRespuestas=new List<Respuesta>();
         using(SqlConnection db = new SqlConnection(_connectionString) )
         {
-            string sql = "";
-            _ObtenerPreguntas = db.Query<Pregunta>(sql).ToList();
+            string sql = "SELECT * FROM Respuestas";
+            _ObtenerRespuestas = db.Query<Respuesta>(sql).ToList();
         }
-        return _ObtenerPreguntas;
+        return _ObtenerRespuestas;
     }
+
 }
