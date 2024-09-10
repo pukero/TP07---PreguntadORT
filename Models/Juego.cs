@@ -1,16 +1,16 @@
 using System.Data.SqlClient;
 using Dapper;
 namespace TP07___PreguntadORT.Models;
-public class Juego
+public static class Juego
 {
-    public string Username  {get;set;}
-    public int PuntajeActual  {get;set;}
-    public int CantidadPreguntasCorrectas  {get;set;}
-    public int ContadorNroPreguntaActual  {get;set;}
-    public Pregunta PreguntaActual  {get;set;}
-    public List<Pregunta> ListaPreguntas {get;set;}
-    public List<Respuesta> ListaRespuesta {get;set;}
-    private void InicializarJuego()
+    public static string Username  {get;set;}
+    public static int PuntajeActual  {get;set;}
+    public static int CantidadPreguntasCorrectas  {get;set;}
+    public static int ContadorNroPreguntaActual  {get;set;}
+    public static Pregunta PreguntaActual  {get;set;}
+    public static List<Pregunta> ListaPreguntas {get;set;}
+    public static List<Respuesta> ListaRespuesta {get;set;}
+    private static void InicializarJuego()
     {
         Username="";
         PuntajeActual=0;
@@ -20,12 +20,12 @@ public class Juego
         ListaPreguntas=null;
         ListaRespuesta=null;
     }
-    private List<Categoria> ObtenerCategorias()
+    private static List<Categoria> ObtenerCategorias()
     {
         
         return BD.ObtenerCategorias(); 
     }
-    private List<Dificultad> ObtenerDificultades()
+    private static List<Dificultad> ObtenerDificultades()
     {
         return BD.ObtenerDificultades(); 
     }  
