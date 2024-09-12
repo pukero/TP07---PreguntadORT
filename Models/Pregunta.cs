@@ -1,6 +1,6 @@
 public class Pregunta
 {
-    public int IdPregunta { get; set; }
+    public int IdPregunta {get; set;}
     public string Nombre {get; set;}
     public string Foto {get;set;} 
     public Pregunta(){}

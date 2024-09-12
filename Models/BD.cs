@@ -37,11 +37,11 @@ public static class BD
 
         if (dificultad != -1)
             {
-                sql += " AND DificultadId = @dificultad";
+                sql += " AND IdDificultad = @dificultad";
             }
         if (categoria != -1)
             {
-                sql += " AND CategoriaId = @categoria";
+                sql += " AND IdCategoria = @categoria";
             }
 
         _ObtenerPreguntas = db.Query<Pregunta>(sql, new { dificultad, categoria }).ToList();
