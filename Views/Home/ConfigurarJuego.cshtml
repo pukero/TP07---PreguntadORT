@@ -1,0 +1,20 @@
+@{
+    ViewData["Title"] = "Configurar Juego";
+}
+
+@if (ViewBag.Error != null)
+{
+    <p style="color:red">@ViewBag.Error</p>
+}
+
+<form class = "Formulario" action='@Url.ActionLink("IngresarJugador", "Home")' method="post">
+    Nombre del jugador: <input type="text" id="nombreJugador" name="nombreJugador" />
+    Nivel de Dificultad: 
+    <select name="idDificultad" class="form-select">
+        @foreach(Dificultad dif in ViewBag.Dificultad)
+        {
+            <option value="@dif.IdDificultad">@dif.Nombre</option>
+        }
+    </select>
+    <input  type="submit" value="Enviar" />
+</form>
