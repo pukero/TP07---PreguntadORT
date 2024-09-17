@@ -1,11 +1,10 @@
 @{
-    ViewBag.Title = "Fin del Juego";
+    ViewData["Title"] = "Fin del Juego";
 }
 
-<div class="centered-content">
-    <h2>JUEGO TERMINADO</h2>
-    <p>Usuario: @ViewBag.Username</p>
-    <p>Puntaje Final: @ViewBag.PuntajeFinal</p>
+<div class="text-center mt-5">
+    <h2>Juego Terminado, @ViewBag.Username</h2>
+    <h3>Tu puntaje final es: @ViewBag.PuntajeFinal</h3>
 
-    <a href="@Url.Action("ConfigurarJuego", "Home")" class="btn btn-primary">Volver a jugar</a>
+    <a href="@Url.Action("ConfigurarJuego", "Home")" class="btn btn-primary mt-3">Volver a Jugar</a>
 </div>

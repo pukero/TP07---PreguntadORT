@@ -2,19 +2,32 @@
     ViewData["Title"] = "Configurar Juego";
 }
 
-@if (ViewBag.Error != null)
-{
-    <p style="color:red">@ViewBag.Error</p>
-}
+<h2>Configurar Juego</h2>
 
-<form class = "Formulario" action='@Url.ActionLink("IngresarJugador", "Home")' method="post">
-    Nombre del jugador: <input type="text" id="nombreJugador" name="nombreJugador" />
-    Nivel de Dificultad: 
-    <select name="idDificultad" class="form-select">
-        @foreach(Dificultad dif in ViewBag.Dificultad)
-        {
-            <option value="@dif.IdDificultad">@dif.Nombre</option>
-        }
-    </select>
-    <input  type="submit" value="Enviar" />
+<form class="form-horizontal mt-4" action='@Url.Action("Comenzar", "Home")' method="get">
+    <div class="form-group mb-3">
+        <label for="username" class="control-label">Nombre del Jugador:</label>
+        <input type="text" id="username" name="username" class="form-control" required />
+    </div>
+    <div class="form-group mb-3">
+        <label for="dificultad" class="control-label">Nivel de Dificultad:</label>
+        <select id="dificultad" name="dificultad" class="form-select" required>
+            <option value="-1">Todas</option>
+            @foreach (Dificultad dif in ViewBag.Dificultades)
+            {
+                <option value="@dif.IdDificultad">@dif.Nombre</option>
+            }
+        </select>
+    </div>
+    <div class="form-group mb-3">
+        <label for="categoria" class="control-label">Categoría:</label>
+        <select id="categoria" name="categoria" class="form-select" required>
+            <option value="-1">Todas</option>
+            @foreach (Categoria cat in ViewBag.Categorias)
+            {
+                <option value="@cat.IdCategoria">@cat.Nombre</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Comenzar</button>
 </form>

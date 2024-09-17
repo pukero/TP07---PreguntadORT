@@ -1,20 +1,29 @@
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Juego";
 }
 
-<h3>@ViewBag.Pregunta.Enunciado</h3>
-@if (ViewBag.Pregunta.Foto != null) 
-{
-    <img src=@ViewBag.Pregunta.Foto>
-}
+<h2>@ViewBag.Username, tu puntaje actual es: @ViewBag.PuntajeActual</h2>
 
-@foreach(Respuesta resp in ViewBag.Respuestas)
-{
-    <form id="categoryForm" action='@Url.ActionLink("Responder", "Home")' method="post">
-        <input type="hidden" name="idRespuesta" id="idRespuesta" value="@resp.IdRespuesta" />
-        <input type="hidden" name="idDificultad" id="idDificultad" value="@ViewBag.Dificultad" />
-        <input type="hidden" name="nombreJugador" id="nombreJugador" value="@ViewBag.NombreJugador" />
-        <input type="submit" value="@resp.Contenido" />
-    </form>
-}
+<div class="card mx-auto my-4" style="width: 30rem;">
+    <div class="card-body">
+        <h3 class="card-title">@ViewBag.Pregunta.Enunciado</h3>
+        @if (!string.IsNullOrEmpty(ViewBag.Pregunta.Foto))
+        {
+            <img src="@ViewBag.Pregunta.Foto" alt="Imagen de la pregunta" class="img-fluid mb-3">
+        }
 
+        <form method="post" action='@Url.Action("VerificarRespuesta", "Home")'>
+            @foreach (Respuesta resp in ViewBag.Respuestas)
+            {
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="radio" name="idRespuesta" id="respuesta_@resp.IdRespuesta" value="@resp.IdRespuesta" required>
+                    <label class="form-check-label" for="respuesta_@resp.IdRespuesta">
+                        @resp.Contenido
+                    </label>
+                </div>
+            }
+            <input type="hidden" name="idPregunta" value="@ViewBag.Pregunta.IdPregunta" />
+            <button type="submit" class="btn btn-success mt-3">Responder</button>
+        </form>
+    </div>
+</div>

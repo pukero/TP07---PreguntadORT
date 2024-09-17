@@ -2,16 +2,15 @@
     ViewData["Title"] = "Index";
 }
 
-<div>
-  <img src = "~/imagenes/logo.webp">
+<div class="text-center my-4">
+    <img src="~/imagenes/logo.webp" alt="Logo del Juego" class="img-fluid">
 </div>
 
-<div class="card" style="width: 18rem;">
-  <img src="~/imagenes/preguntados.webp" class="card-img-top" alt="preguntados">
-  <div class="card-body">
-    <h5 class="card-title">DESEA JUGAR</h5>
-    <p class="card-text"></p>
-    <a href='@Url.Action("ConfigurarJuego", "Home")' class="btn btn-primary">JUGAR</a>
-  </div>
+<div class="card mx-auto" style="width: 18rem;">
+    <img src="~/imagenes/preguntados.webp" class="card-img-top" alt="Imagen de Preguntados">
+    <div class="card-body text-center">
+        <h5 class="card-title">¿Desea Jugar?</h5>
+        <p class="card-text">¡Preparate para un juegazo diseñado por el señor Lewkowicz y Don Luca!</p>
+        <a href='@Url.Action("ConfigurarJuego", "Home")' class="btn btn-primary">Jugar</a>
+    </div>
 </div>
-

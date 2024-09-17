@@ -2,62 +2,59 @@ using System.Data.SqlClient;
 using Dapper;
 namespace TP07___PreguntadORT.Models;
 
-
 public static class BD
 {
     private static string _connectionString = @"Server=localhost; DataBase=preguntadort; Trusted_Connection=True;";
-    static public List<Categoria> ObtenerCategorias()
+    
+    public static List<Categoria> ObtenerCategorias()
     {
-        List<Categoria>_ObtenerCategorias=new List<Categoria>();
-        using(SqlConnection db = new SqlConnection(_connectionString) )
+        List<Categoria> _ObtenerCategorias = new List<Categoria>();
+        using(SqlConnection db = new SqlConnection(_connectionString))
         {
             string sql = "SELECT * FROM Categoria";
             _ObtenerCategorias = db.Query<Categoria>(sql).ToList();
         }
         return _ObtenerCategorias;
     }
-    static public List<Dificultad> ObtenerDificultades()
+
+    public static List<Dificultad> ObtenerDificultades()
     {
-        List<Dificultad>_ObtenerDificultades=new List<Dificultad>();
-        using(SqlConnection db = new SqlConnection(_connectionString) )
+        List<Dificultad> _ObtenerDificultades = new List<Dificultad>();
+        using(SqlConnection db = new SqlConnection(_connectionString))
         {
             string sql = "SELECT * FROM Dificultades";
             _ObtenerDificultades = db.Query<Dificultad>(sql).ToList();
         }
         return _ObtenerDificultades;
     }
-    static public List<Pregunta> ObtenerPreguntas(int dificultad, int categoria)
-    {
-    
-        List<Pregunta> _ObtenerPreguntas = new List<Pregunta>();
 
+    public static List<Pregunta> ObtenerPreguntas(int dificultad, int categoria)
+    {
+        List<Pregunta> _ObtenerPreguntas = new List<Pregunta>();
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
-        string sql = "SELECT * FROM Pregunta WHERE 1=1";
-
-        if (dificultad != -1)
+            string sql = "SELECT * FROM Pregunta WHERE 1=1";
+            if (dificultad != -1)
             {
                 sql += " AND IdDificultad = @dificultad";
             }
-        if (categoria != -1)
+            if (categoria != -1)
             {
                 sql += " AND IdCategoria = @categoria";
             }
-
-        _ObtenerPreguntas = db.Query<Pregunta>(sql, new { dificultad, categoria }).ToList();
+            _ObtenerPreguntas = db.Query<Pregunta>(sql, new { dificultad, categoria }).ToList();
         }
-
-    return _ObtenerPreguntas;
+        return _ObtenerPreguntas;
     }
-    static public List<Respuesta> ObtenerRespuestas(int idPregunta)
+
+    public static List<Respuesta> ObtenerRespuestas(int idPregunta)
     {
-        List<Respuesta>_ObtenerRespuestas=new List<Respuesta>();
-        using(SqlConnection db = new SqlConnection(_connectionString) )
+        List<Respuesta> _ObtenerRespuestas = new List<Respuesta>();
+        using(SqlConnection db = new SqlConnection(_connectionString))
         {
-            string sql = "SELECT * FROM Respuestas";
-            _ObtenerRespuestas = db.Query<Respuesta>(sql).ToList();
+            string sql = "SELECT * FROM Respuestas WHERE IdPregunta = @idPregunta";
+            _ObtenerRespuestas = db.Query<Respuesta>(sql, new { idPregunta }).ToList();
         }
         return _ObtenerRespuestas;
     }
-
 }
