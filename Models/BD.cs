@@ -11,7 +11,7 @@ public static class BD
         List<Categoria> _ObtenerCategorias = new List<Categoria>();
         using(SqlConnection db = new SqlConnection(_connectionString))
         {
-            string sql = "SELECT * FROM Categoria";
+            string sql = "SELECT * FROM Categorias";
             _ObtenerCategorias = db.Query<Categoria>(sql).ToList();
         }
         return _ObtenerCategorias;
@@ -33,7 +33,7 @@ public static class BD
         List<Pregunta> _ObtenerPreguntas = new List<Pregunta>();
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
-            string sql = "SELECT * FROM Pregunta WHERE 1=1";
+            string sql = "SELECT * FROM Preguntas WHERE 1=1";
             if (dificultad != -1)
             {
                 sql += " AND IdDificultad = @dificultad";
@@ -42,7 +42,7 @@ public static class BD
             {
                 sql += " AND IdCategoria = @categoria";
             }
-            _ObtenerPreguntas = db.Query<Pregunta>(sql, new { dificultad, categoria }).ToList();
+            _ObtenerPreguntas = db.Query<Pregunta>(sql, new {dificultad, categoria}).ToList();
         }
         return _ObtenerPreguntas;
     }
